@@ -9,3 +9,4 @@ body{overflow:hidden;font-size:13px}.project-topbar{position:fixed;inset:24px 36
 .project-sheet figcaption{z-index:2}
 .sheet-view~figcaption{display:none}
 .ticker{display:none!important}
+img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}

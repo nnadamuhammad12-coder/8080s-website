@@ -25,3 +25,4 @@ dialog.card .close{font-size:10px}
 @media(prefers-reduced-motion:reduce){.chip{transition:none}.model-area .face-label{transition:none}}
 .copyright .lit{display:block;font-size:9px;margin-top:3px;opacity:.75}
 .ticker{display:none!important}
+img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
