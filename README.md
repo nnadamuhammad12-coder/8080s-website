@@ -1,6 +1,6 @@
 # muhammadnada.com
 
-Static site, no build step. Published to Cloudflare Pages (project `muhammadnada`) with Wrangler.
+Static site, no build step. Published to Cloudflare Pages (project `8080s-website`) with Wrangler.
 
 Deploy (from this folder):
 - Mac / Linux: `./deploy.sh`
