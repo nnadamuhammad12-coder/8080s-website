@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Initiatives — Muhammad Nada</title><meta name="description" content="Initiatives by Muhammad Nada: Nuri, Alchemy, Rowad, TDF+, Beltone, LOGIC, MUN and Outreach.">
+<style>
+:root{--paper:#fafaf8;--ink:#171817;--muted:#838581;--grid:rgba(90,90,80,.037);--line:#c8c9c3;--panel:#fafaf8;--face:34,35,33}
+body[data-theme=blue]{--paper:#0e9aaa;--panel:#14a7b7;--grid:rgba(255,255,255,.08);--line:#7fd3dc;--face:255,255,255;--ink:#ffffff;--muted:#c9eff3}
+body[data-theme=yellow]{--paper:#efe5a5;--panel:#f4edbc;--grid:rgba(70,50,0,.05);--line:#b9ac6b;--face:53,45,13}
+body[data-theme=red]{--paper:#efb7ae;--panel:#f4c5bd;--grid:rgba(80,20,10,.05);--line:#bd847c;--face:58,24,20;--ink:#ffffff;--muted:#f8e65e}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{background-color:var(--paper);color:var(--ink);font:13px/1.55 'Courier New',monospace;overflow:hidden;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:8px 8px}
+a{color:inherit;text-decoration:none}
+.frame{position:fixed;inset:24px;border:1px solid var(--grid);pointer-events:none}
+.brand{position:fixed;top:30px;left:36px;font-size:17px;z-index:3}
+.back{position:fixed;top:33px;left:max(15%,200px);font-size:11px;color:var(--muted);z-index:3}
+.topnav{position:fixed;top:34px;right:36px;display:flex;gap:18px;font-size:12px;color:var(--muted);z-index:3}
+.topnav a:hover,.back:hover{color:var(--ink)}
+.intro{position:fixed;left:15%;top:50%;transform:translateY(-50%);max-width:250px;z-index:3}
+.intro h1{font-size:28px;letter-spacing:-1.2px;font-weight:400;margin:0 0 14px}
+.intro p{color:var(--muted);margin:0 0 22px}
+.intro ol{list-style:none;padding:0;margin:0;counter-reset:i}
+.intro li{counter-increment:i;margin:2px 0}
+.intro li a{display:inline-flex;gap:10px;color:var(--muted)}
+.intro li a::before{content:counter(i,decimal-leading-zero);opacity:.6}
+.intro li a:hover,.intro li a[data-hot]{color:var(--ink)}
+.stage{position:fixed;inset:0;left:28%}
+canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+#labels{position:absolute;inset:0;pointer-events:none}
+.lab{pointer-events:auto;position:absolute;transform:translate(-50%,-50%);padding:4px 10px;font:11px 'Courier New',monospace;white-space:nowrap;border:1px solid var(--line);border-radius:2px;background:var(--panel);color:var(--ink);cursor:pointer;transition:background .15s,color .15s}
+.lab:hover,.lab[data-hot]{background:var(--ink);color:var(--paper);z-index:9}
+.lab.soon::after{content:'coming soon';position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);font-size:9px;color:var(--muted);background:var(--paper);padding:0 4px}
+.hint{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}
+@media (max-width:760px){.intro{top:96px;transform:none;left:36px}.stage{left:0;top:240px}}
+</style></head>
+<body><div class="frame" aria-hidden="true"></div>
+<a class="brand" href="/">Muhammad Nada</a><a class="back" href="/">← index</a>
+<nav class="topnav" aria-label="Site"><a href="/">Home</a><a href="/form/">Info</a><a href="/academic/">Archive</a></nav>
+<section class="intro"><h1>initiatives</h1><p>work beyond the studio. choose a side.</p><ol id="list"></ol></section>
+<div class="stage"><canvas id="oct" aria-label="A small spinning octagon; each side is an initiative"></canvas><div id="labels"></div></div>
+<p class="hint">hover to hold · drag to turn · click to open</p>
+<script type="module">
+import {rotate,project,segments,segmentFaces,OUTER_FACE} from '/geometry.mjs?v=9';
+const ITEMS=[['Nuri',null],['Alchemy','/initiatives/alchemy/'],['Rowad',null],['TDF+',null],['Beltone',null],['LOGIC',null],['MUN',null],['Outreach',null]];
+try{const t=localStorage.getItem('nada-theme');if(['blue','yellow','red'].includes(t))document.body.dataset.theme=t;}catch{}
+const cv=document.getElementById('oct'),ctx=cv.getContext('2d'),labRoot=document.getElementById('labels'),list=document.getElementById('list');
+const segs=segments({inner:.6,outer:1,depth:.32,gap:.05});
+let hot=-1,hold=false,yaw=.4,pitch=-.62,roll=0,drag=null,soonTimer;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function open(i){const [n,href]=ITEMS[i];if(!n)return;if(href){location.assign(href);return;}const el=labs[i];el.classList.add('soon');clearTimeout(soonTimer);soonTimer=setTimeout(()=>el.classList.remove('soon'),2200);}
+const labs=ITEMS.map(([n],i)=>{if(!n)return null;const b=document.createElement(ITEMS[i][1]?'a':'button');b.className='lab';b.textContent=n;if(ITEMS[i][1])b.href=ITEMS[i][1];else b.onclick=()=>open(i);
+ b.onmouseenter=()=>{hot=i;hold=true;mark();};b.onmouseleave=()=>{hot=-1;hold=false;mark();};b.onfocus=b.onmouseenter;b.onblur=b.onmouseleave;labRoot.append(b);
+ const li=document.createElement('li'),a=document.createElement('a');a.textContent=n;a.href=ITEMS[i][1]||'#';a.onclick=e=>{if(!ITEMS[i][1]){e.preventDefault();open(i);}};a.onmouseenter=b.onmouseenter;a.onmouseleave=b.onmouseleave;li.append(a);list.append(li);b._li=a;return b;});
+function mark(){labs.forEach((b,i)=>{if(!b)return;if(i===hot){b.dataset.hot='';b._li.dataset.hot='';}else{delete b.dataset.hot;delete b._li.dataset.hot;}});}
+function face(){return getComputedStyle(document.body).getPropertyValue('--face').trim()||'34,35,33';}
+let W=0,H=0,dpr=1;function size(){dpr=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;}addEventListener('resize',size);size();
+cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY,yaw,pitch};cv.setPointerCapture(e.pointerId);});
+cv.addEventListener('pointermove',e=>{if(!drag)return;yaw=drag.yaw+(e.clientX-drag.x)*.008;pitch=Math.max(-1.3,Math.min(-.15,drag.pitch+(e.clientY-drag.y)*.006));});
+cv.addEventListener('pointerup',()=>drag=null);
+let last=performance.now();
+function frame(t){const dt=Math.min(50,t-last);last=t;
+ if(!hold&&!drag&&!reduced){yaw+=dt*.00032;roll=Math.sin(t*.0004)*.08;}
+ const ink=face(),scale=Math.min(W,H)*.23,cx=W*.5;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+ const P=v=>{const r=rotate(v,yaw,pitch,roll);return project(r,W,H,scale);};
+ // floor shadow
+ const fl=[];segs.forEach(s=>s.vertices.forEach(v=>{const r=rotate(v,yaw,0,0);fl.push([cx+r[0]*scale*1.02,H*.45+scale*1.55+r[2]*scale*.28]);}));
+ fl.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]);const lo=[],hi=[];for(const p of fl){while(lo.length>1&&cr(lo.at(-2),lo.at(-1),p)<=0)lo.pop();lo.push(p);}for(const p of fl.slice().reverse()){while(hi.length>1&&cr(hi.at(-2),hi.at(-1),p)<=0)hi.pop();hi.push(p);}
+ const hull=[...lo.slice(0,-1),...hi.slice(0,-1)];ctx.beginPath();hull.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.closePath();ctx.fillStyle=`rgba(${ink},.07)`;ctx.filter='blur(6px)';ctx.fill();ctx.filter='none';
+ const polys=[];
+ segs.forEach((s,i)=>{const pv=s.vertices.map(P);segmentFaces.forEach((f,k)=>{const pts=f.map(j=>pv[j]);const z=pts.reduce((a,p)=>a+p[2],0)/pts.length;polys.push({pts,z,i,k});});
+  const of=segmentFaces[OUTER_FACE].map(j=>pv[j]);const c=of.reduce((a,p)=>[a[0]+p[0]/4,a[1]+p[1]/4,a[2]+p[2]/4],[0,0,0]);s._c=c;});
+ polys.sort((a,b)=>b.z-a.z);
+ for(const p of polys){ctx.beginPath();p.pts.forEach((q,j)=>j?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();
+  const named=!!ITEMS[p.i][0];ctx.fillStyle=`rgba(${ink},${p.i===hot?.34:named?.09:.035})`;ctx.fill();ctx.strokeStyle=`rgba(${ink},${named?.6:.3})`;ctx.lineWidth=.8;ctx.setLineDash(named?[]:[3,3]);ctx.stroke();ctx.setLineDash([]);}
+ const centre=P([0,0,0]);
+ segs.forEach((s,i)=>{const b=labs[i];if(!b)return;const c=s._c;const dx=c[0]-centre[0],dy=c[1]-centre[1],L=Math.hypot(dx,dy)||1;const lx=c[0]+dx/L*46,ly=c[1]+dy/L*30;
+  ctx.beginPath();ctx.moveTo(c[0],c[1]);ctx.lineTo(lx,ly);ctx.setLineDash([2,3]);ctx.strokeStyle=`rgba(${ink},.5)`;ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=`rgba(${ink},.9)`;ctx.fillRect(c[0]-2,c[1]-2,4,4);
+  b.style.left=lx+'px';b.style.top=ly+'px';b.style.opacity=c[2]>.25&&i!==hot?.55:1;b.style.zIndex=c[2]>0?1:3;});
+ requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+</script></body></html>

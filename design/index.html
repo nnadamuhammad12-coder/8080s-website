@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Design — Muhammad Nada</title>
+<meta name="description" content="Muhammad Nada's design work — ceramics.">
+<style>
+/* Layout: the project-viewer page. Fixed left column (groups + caption). Each group fills the screen; scroll down between groups,
+   left/right between the pieces in a group. A research diagram sits above a line of text that runs across the screen.
+   Type: Helvetica only. Colours follow the site's four themes. */
+:root{--paper:#fafaf8;--ink:#171817;--muted:#7a7c78;--soft:#b6b8b3;--grid:rgba(90,90,80,.04);--line:#c8c9c3;--panel:#f1f1ee;--sketch:none;
+  --helvetica:"Helvetica Neue",Helvetica,Arial,sans-serif}
+body[data-theme=blue]{--paper:#0e9aaa;--ink:#ffffff;--muted:#c9eff3;--soft:#7fd3dc;--grid:rgba(255,255,255,.08);--line:#7fd3dc;--panel:#14a7b7;--sketch:invert(1)}
+body[data-theme=yellow]{--paper:#efe5a5;--ink:#171817;--muted:#6d6640;--soft:#b9ac6b;--grid:rgba(70,50,0,.05);--line:#b9ac6b;--panel:#f4edbc}
+body[data-theme=red]{--paper:#efb7ae;--ink:#ffffff;--muted:#f8e65e;--soft:#bd847c;--grid:rgba(80,20,10,.05);--line:#bd847c;--panel:#f4c5bd;--sketch:invert(1)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font:13px/1.4 var(--helvetica);color:var(--ink);background-color:var(--paper);overflow:hidden;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:8px 8px}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+:focus-visible{outline:1.5px solid var(--ink);outline-offset:3px}
+
+.brand{position:fixed;top:34px;left:36px;font-size:17px;letter-spacing:-.01em;z-index:5}
+.back{position:fixed;top:36px;left:max(15%,200px);font-size:11px;color:var(--muted);z-index:5}
+.back:hover{color:var(--ink)}
+.topnav{position:fixed;top:38px;right:36px;display:flex;gap:18px;font-size:12px;color:var(--muted);z-index:5}
+.topnav a:hover{color:var(--ink)}
+
+/* Left column: groups and the caption of the piece in view */
+.col{position:fixed;left:15%;top:76px;width:min(270px,20vw);z-index:4}
+.groups{display:grid;grid-auto-flow:column;grid-template-rows:repeat(5,auto);column-gap:20px;justify-content:start;font-size:13px;line-height:18px}
+.groups a{color:var(--soft);white-space:nowrap;transition:color .2s}
+.groups a:hover{color:var(--muted)}
+.groups a[aria-current=true]{color:var(--ink)}
+.caption{margin-top:62px;font-size:12.5px;line-height:18px;color:var(--muted)}
+.sig{display:block;width:62px;height:40px;margin-top:6px;background:var(--muted);-webkit-mask:url(/assets/design/signature.png) left center/contain no-repeat;mask:url(/assets/design/signature.png) left center/contain no-repeat}
+.caption strong{display:block;color:var(--ink);font-weight:700;opacity:.82}
+
+/* Bottom: research diagram above a line of text that runs across the screen */
+.bottom{position:fixed;left:15%;right:12%;bottom:66px;z-index:4;display:flex;flex-direction:column;gap:16px;pointer-events:none}
+.note{width:min(330px,23vw);color:var(--ink)}
+.note svg,.mnote svg{display:block;width:100%;height:auto;overflow:visible}
+.text{display:flex;align-items:baseline;gap:28px;pointer-events:auto}
+.text p{margin:0;font-size:12.5px;line-height:19px;color:var(--muted);flex:1;min-width:0}
+.counter{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* Right: groups stacked vertically, pieces side by side within a group */
+.stage{position:fixed;inset:0 12% 0 37.5%;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none}
+.stage::-webkit-scrollbar,.track::-webkit-scrollbar{display:none}
+.group{height:100svh;scroll-snap-align:start;position:relative}
+.track{height:100%;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.piece{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;padding:60px 0 230px}
+.set{display:flex;align-items:flex-end;justify-content:center;gap:clamp(10px,1.6vw,24px);width:100%}
+.photo{flex:0 1 48%;min-width:0;margin:0;display:flex;justify-content:center;align-items:flex-end}
+.photo img{display:block;width:auto;max-width:100%;height:auto;max-height:min(50vh,450px);object-fit:contain;transition:filter .25s}
+body:not(.no-shadow) .photo img{filter:drop-shadow(0 22px 16px rgba(0,0,0,.16)) drop-shadow(0 4px 3px rgba(0,0,0,.08))}
+.sk{display:flex;align-items:flex-end;gap:clamp(6px,1vw,14px);flex:0 1 26%;min-width:0}
+.sk.left{justify-content:flex-end}.sk.right{justify-content:flex-start}
+.sk figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.sk img{display:block;height:auto;max-width:100%;filter:var(--sketch)}
+.sk figcaption{font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+
+/* Left / right between pieces in a group */
+.side{position:absolute;bottom:191px;display:flex;align-items:baseline;gap:5px;border:0;background:none;padding:8px 4px;color:var(--muted);cursor:pointer;z-index:2}
+.side .i{font-size:20px;line-height:1}.side .t{font-size:10.5px}
+.side:hover{color:var(--ink)}
+.side[disabled]{opacity:0;pointer-events:none}
+.side.prev{right:calc(50% + 26px)}.side.next{left:calc(50% + 26px)}
+.group.single .side{display:none}
+.dots{position:absolute;left:0;right:0;bottom:200px;display:flex;justify-content:center;gap:8px}
+.dots button{width:6px;height:6px;border-radius:50%;border:1px solid var(--muted);background:none;padding:0;cursor:pointer}
+.dots button[aria-current=true]{background:var(--ink);border-color:var(--ink)}
+.dots.single{display:none}
+
+/* Shared chrome, as on the homepage */
+.theme{position:fixed;left:36px;bottom:30px;z-index:5}
+.theme small{display:block;color:var(--muted);font-size:9px;margin-bottom:5px}
+.theme div{display:flex;gap:5px;align-items:center}
+.theme button{width:13px;height:17px;border:1px solid var(--line);border-radius:2px;padding:0;cursor:pointer}
+.theme button[aria-pressed=true]{outline:1.5px solid var(--ink);outline-offset:1px}
+.theme [data-theme=blue]{background:#13a8b8}.theme [data-theme=yellow]{background:#f8e65e}.theme [data-theme=red]{background:#fb786e}.theme [data-theme=light]{background:#fafaf8}
+.theme #shadow{width:20px;height:22px;background:var(--panel);font-size:10px;line-height:1;margin-left:4px}
+.ticker{position:fixed;bottom:35px;left:calc(15% + 320px);right:130px;height:19px;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 10%,var(--paper));overflow:hidden;font-size:9px;line-height:17px;z-index:3}
+.ticker>div{white-space:nowrap;width:max-content;animation:tick 35s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+.sound{position:fixed;right:36px;bottom:30px;border:0;background:none;text-align:center;cursor:pointer;color:var(--ink);z-index:5}
+.sound small{display:block;font-size:9px;color:var(--muted)}
+
+.m,.group h2{display:none}
+@media (max-width:820px){
+  body{overflow:auto}
+  .brand{position:static;display:block;padding:20px 16px 0}
+  .back{position:static;display:inline-block;padding:6px 16px}
+  .topnav{position:absolute;top:22px;right:16px}
+  .col{position:static;width:auto;padding:8px 16px 0}
+  .groups{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:repeat(3,auto);gap:4px 16px}
+  .caption,.bottom,.ticker{display:none}
+  .stage{position:static;overflow:visible;scroll-snap-type:none}
+  .group{height:auto;padding-top:22px}
+  .group h2{display:block;margin:0 16px;font-size:12px;font-weight:700}
+  .piece{flex-direction:column;align-items:stretch;padding:16px 16px 30px}
+  .set{flex-wrap:wrap}
+  .photo{flex:1 1 100%;order:-1}
+  .photo img{max-height:44vh}
+  .sk.left,.sk.right{flex:1 1 45%;justify-content:center}
+  .side{display:none}
+  .dots{position:static;margin:0 0 18px}
+  .m{display:block;margin-top:16px;font-size:12px;line-height:17px;color:var(--muted)}
+  .m strong{display:block;color:var(--ink)}
+  .mnote{color:var(--ink);margin-bottom:12px;max-width:340px}
+  .theme,.sound{position:static;display:inline-block;margin:20px 16px 26px}
+}
+@media (prefers-reduced-motion:reduce){.stage,.track{scroll-behavior:auto}.ticker>div{animation:none}.groups a{transition:none}}
+.ticker{display:none!important}
+</style>
+</head>
+<body>
+<a class="brand" href="/">Muhammad Nada</a>
+<a class="back" href="/">← index</a>
+<nav class="topnav" aria-label="Site"><a href="/">Home</a><a href="/form/">Info</a><a href="/academic/">Archive</a></nav>
+
+<aside class="col">
+  <nav class="groups" id="groups" aria-label="Groups"></nav>
+  <div class="caption" id="caption" aria-live="polite"></div>
+</aside>
+<div class="bottom"><div class="note" id="note"></div><div class="text"><p id="desc"></p><span class="counter" id="counter"></span></div></div>
+
+<main class="stage" id="stage"></main>
+
+<div class="theme" role="group" aria-label="Colour theme"><small>theme &amp; shadow</small><div><button data-theme="blue" aria-label="Turquoise theme"></button><button data-theme="yellow" aria-label="Yellow theme"></button><button data-theme="red" aria-label="Red theme"></button><button data-theme="light" aria-label="Light theme" aria-pressed="true"></button><button id="shadow" aria-label="Toggle shadow" aria-pressed="true">◧</button></div></div>
+<div class="ticker" aria-label="Site updates"><div>EIGHT SIDES <span lang="ja">八つの面</span> <bdi lang="ar">ثمانية أوجه</bdi> /// ARCHITECTURE <span lang="ja">建築</span> <bdi lang="ar">عمارة</bdi> /// FORM <span lang="ja">形</span> <bdi lang="ar">شكل</bdi> /// FUNCTION <span lang="ja">機能</span> <bdi lang="ar">وظيفة</bdi> /// LIGHT + SHADE <span lang="ja">光と影</span> <bdi lang="ar">ضوء وظل</bdi> /// THE SEA <span lang="ja">海</span> <bdi lang="ar">البحر</bdi> /// CLAY + GLASS <span lang="ja">土と硝子</span> <bdi lang="ar">طين وزجاج</bdi> /// BALANCE <span lang="ja">均衡</span> <bdi lang="ar">توازن</bdi> /// REST <span lang="ja">休息</span> <bdi lang="ar">راحة</bdi> /// CAIRO · LONDON · BOSTON <span lang="ja">カイロ・ロンドン・ボストン</span> <bdi lang="ar">القاهرة · لندن · بوسطن</bdi> /// ALWAYS IN PROGRESS <span lang="ja">未完成</span> <bdi lang="ar">قيد الإنجاز</bdi> /// EIGHT SIDES <span lang="ja">八つの面</span> <bdi lang="ar">ثمانية أوجه</bdi> /// ARCHITECTURE <span lang="ja">建築</span> <bdi lang="ar">عمارة</bdi> /// FORM <span lang="ja">形</span> <bdi lang="ar">شكل</bdi> /// FUNCTION <span lang="ja">機能</span> <bdi lang="ar">وظيفة</bdi> /// LIGHT + SHADE <span lang="ja">光と影</span> <bdi lang="ar">ضوء وظل</bdi> /// THE SEA <span lang="ja">海</span> <bdi lang="ar">البحر</bdi> /// CLAY + GLASS <span lang="ja">土と硝子</span> <bdi lang="ar">طين وزجاج</bdi> /// BALANCE <span lang="ja">均衡</span> <bdi lang="ar">توازن</bdi> /// REST <span lang="ja">休息</span> <bdi lang="ar">راحة</bdi> /// CAIRO · LONDON · BOSTON <span lang="ja">カイロ・ロンドン・ボストン</span> <bdi lang="ar">القاهرة · لندن · بوسطن</bdi> /// ALWAYS IN PROGRESS <span lang="ja">未完成</span> <bdi lang="ar">قيد الإنجاز</bdi> /// </div></div>
+<button class="sound" id="sound" aria-pressed="false" aria-label="Toggle interaction sounds"><span>▂ ▄ ▆</span><small>sound off</small></button>
+
+<script>
+const ART='/assets/design/';
+// ---- Research diagrams: analytical linework, stippled material, dashed callouts into a zoom box, layer labels ----
+const FONT='font-family="Helvetica Neue,Helvetica,Arial,sans-serif"';
+let seed=11;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647;};
+let uid=0;
+// stipple: random dots clipped to a shape, denser towards one side (bias 0 = even)
+function stipple(d,box,n,bias=0,biasDir=[1,0]){const id='c'+(++uid);let dots='';const [x,y,w,h]=box;
+  for(let i=0;i<n;i++){let u=rnd(),v=rnd();if(bias){const t=biasDir[0]?u:v;if(rnd()>Math.pow(biasDir[0]>0||biasDir[1]>0?t:1-t,bias)){i--;continue;}}
+    dots+=`<circle cx="${(x+u*w).toFixed(1)}" cy="${(y+v*h).toFixed(1)}" r="${(.35+rnd()*.45).toFixed(2)}"/>`;}
+  return `<clipPath id="${id}"><path d="${d}"/></clipPath><g clip-path="url(#${id})" fill="currentColor" opacity=".85">${dots}</g>`;}
+const ln=(d,w=1,o=1,dash='')=>`<path d="${d}" fill="none" stroke="currentColor" stroke-width="${w}" opacity="${o}" ${dash?`stroke-dasharray="${dash}"`:''} stroke-linecap="round" stroke-linejoin="round"/>`;
+const tx=(x,y,t,s=8,o=1,a='start')=>`<text x="${x}" y="${y}" font-size="${s}" ${FONT} fill="currentColor" opacity="${o}" text-anchor="${a}">${t}</text>`;
+const mark=(x,y)=>`<rect x="${x-2}" y="${y-2}" width="4" height="4" fill="currentColor"/>`;
+const arrow=(x1,y1,x2,y2)=>{const a=Math.atan2(y2-y1,x2-x1),l=4;return ln(`M${x1} ${y1}L${x2} ${y2}`,.7)+`<path d="M${x2-l*Math.cos(a-.5)} ${y2-l*Math.sin(a-.5)}L${x2} ${y2}L${x2-l*Math.cos(a+.5)} ${y2-l*Math.sin(a+.5)}" fill="none" stroke="currentColor" stroke-width=".7"/>`;};
+const svg=(label,body)=>`<svg viewBox="0 0 330 168" role="img" aria-label="${label}">${body}</svg>`;
+const NOTES={
+ceramics:svg('Diagram: the glazed vessel in elevation, with a callout into its wall: raw clay inside, glaze outside. Below, a bar: 29.7% below the national poverty line.',
+  ln('M18 112c-4-22-2-38 6-48 10-4 24-4 32 0 6 8 8 26 4 48z',1.3)+ln('M24 64c8 4 24 4 32 0',.8,.7)+
+  ln('M50 84h16v20H50z',.7,1,'2 2')+ln('M66 84L130 20M66 104L130 116',.6,.7,'2 2')+
+  
+  stipple('M168 20C178 50 178 86 168 116H262C252 86 252 50 262 20Z',[160,20,110,96],900,1.6,[1,0])+
+  ln('M168 20C178 50 178 86 168 116',1.4)+ln('M262 20C252 86 252 50 262 116',.1,0)+ln('M262 20C252 50 252 86 262 116',2.6)+
+  ln('M270 20C260 50 260 86 270 116',.9)+tx(140,14,'inner — raw clay',7.5)+tx(316,14,'outer — glaze',7.5,1,'end')+
+  arrow(150,60,163,60)+arrow(296,60,276,60)+tx(130,128,'glazed vessel — wall section',7.5,.8)+
+  stipple('M18 150h89.7v10H18z',[18,150,90,10],320)+
+  ln('M107.7 146v18',.8)+tx(18,144,'29.7% — below the national poverty line',8))
+};
+// ---- Content: groups of pieces. Add a piece to a group, or a new group (e.g. Digital art), and it slots in. ----
+const groups=[
+ {id:'ceramics',name:'ceramics',pieces:[
+  {id:'ceramics-pair',photo:'ceramics.webp',w:1157,h:1086,alt:'A blue glazed ceramic vessel beside a tall unglazed curving clay form',sketch:'ceramics',note:'ceramics',
+   caption:['ceramics','A glazed vessel and a raw clay form','Clay and glaze'],
+   desc:'I made these in Egypt, at a local artisan’s warsha my grandmother connected me with. On my way there, through east Cairo, my mind was warped by the cultural and economic split I could see, and by how wide the gap between rich and poor is, passing the slums on the way. That day I wanted to make something calming for the house that still held that warped feeling.',
+   sk:{plan:200,section:140,elevation:250}}]}
+];
+const label={plan:'plan',section:'section a—a',elevation:'elevation'};
+const fig=(p,k)=>`<figure><img src="${ART}sketch/${p.sketch}-${k}.png" alt="${label[k]} sketch" style="width:${p.sk[k]}px" loading="lazy"><figcaption>${label[k]}</figcaption></figure>`;
+const stage=document.getElementById('stage'),nav=document.getElementById('groups');
+stage.innerHTML=groups.map((g,gi)=>`<section class="group${g.pieces.length<2?' single':''}" id="${g.id}" data-g="${gi}" aria-label="${g.name}"><h2>${g.name}</h2>
+  <div class="track">${g.pieces.map((p,pi)=>`<article class="piece" id="${p.id}" data-g="${gi}" data-p="${pi}" aria-label="${p.caption[0]}">
+    <div class="set"><div class="sk left">${fig(p,'plan')}${fig(p,'section')}</div>
+      <figure class="photo"><img src="${ART}${p.photo}" alt="${p.alt}" width="${p.w}" height="${p.h}" ${gi||pi?'loading="lazy"':''}></figure>
+      <div class="sk right"></div></div>
+    <div class="m"><div class="mnote">${NOTES[p.note]}</div><strong>${p.caption[0]}</strong>${p.desc}</div></article>`).join('')}</div>
+  <button class="side prev" aria-label="Previous piece"><span class="i">‹</span><span class="t">back</span></button>
+  <button class="side next" aria-label="Next piece"><span class="t">next</span><span class="i">›</span></button>
+  <div class="dots${g.pieces.length<2?' single':''}">${g.pieces.map((p,pi)=>`<button aria-label="Show ${p.caption[0]}" data-p="${pi}"></button>`).join('')}</div></section>`).join('');
+nav.innerHTML=groups.map(g=>`<a href="#${g.id}" data-id="${g.id}">${g.name}</a>`).join('');
+let cur={g:-1,p:0},sound=false,audio;const along=groups.map(()=>0);
+function tick(f=460){if(!sound)return;try{audio??=new AudioContext();const o=audio.createOscillator(),g=audio.createGain();o.frequency.value=f;g.gain.setValueAtTime(.025,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.065);o.connect(g).connect(audio.destination);o.start();o.stop(audio.currentTime+.07);}catch{}}
+function show(gi,pi){if(cur.g===gi&&cur.p===pi)return;cur={g:gi,p:pi};along[gi]=pi;const g=groups[gi],p=g.pieces[pi];
+  nav.querySelectorAll('a').forEach((a,k)=>a.setAttribute('aria-current',String(k===gi)));
+  const c=document.getElementById('caption');c.innerHTML='<strong></strong><span></span><br><span></span><br><i class="sig" role="img" aria-label="Muhammad Nada, signature"></i>';c.querySelector('strong').textContent=p.caption[0];c.querySelectorAll('span').forEach((s,k)=>s.textContent=p.caption[k+1]);
+  document.getElementById('desc').textContent=p.desc;document.getElementById('note').innerHTML=NOTES[p.note];
+  document.getElementById('counter').textContent=`${pi+1} / ${g.pieces.length}`;
+  const sec=stage.querySelector(`.group[data-g="${gi}"]`);sec.querySelector('.prev').disabled=pi===0;sec.querySelector('.next').disabled=pi===g.pieces.length-1;
+  sec.querySelectorAll('.dots button').forEach((b,k)=>b.setAttribute('aria-current',String(k===pi)));
+  history.replaceState(null,'','#'+p.id);tick(520);}
+// Which group is in view (vertical), and which piece within it (horizontal).
+const vio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.55){const gi=+e.target.dataset.g;show(gi,along[gi]);}}),{root:stage,threshold:[.55]});
+stage.querySelectorAll('.group').forEach(s=>vio.observe(s));
+stage.querySelectorAll('.track').forEach(t=>{const hio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>.6){const gi=+e.target.dataset.g,pi=+e.target.dataset.p;along[gi]=pi;if(cur.g===gi)show(gi,pi);}}),{root:t,threshold:[.6]});t.querySelectorAll('.piece').forEach(p=>hio.observe(p));});
+const smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+const goGroup=gi=>{gi=Math.max(0,Math.min(groups.length-1,gi));stage.querySelector(`.group[data-g="${gi}"]`).scrollIntoView({behavior:smooth()});};
+const goPiece=(gi,pi)=>{const g=groups[gi];pi=Math.max(0,Math.min(g.pieces.length-1,pi));const t=stage.querySelector(`.group[data-g="${gi}"] .track`);t.scrollTo({left:pi*t.clientWidth,behavior:smooth()});};
+stage.querySelectorAll('.group').forEach(s=>{const gi=+s.dataset.g;s.querySelector('.prev').onclick=()=>goPiece(gi,along[gi]-1);s.querySelector('.next').onclick=()=>goPiece(gi,along[gi]+1);s.querySelectorAll('.dots button').forEach(b=>b.onclick=()=>goPiece(gi,+b.dataset.p));});
+nav.addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;e.preventDefault();goGroup(groups.findIndex(g=>g.id===a.dataset.id));});
+addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'){e.preventDefault();goPiece(cur.g,cur.p+1);}else if(e.key==='ArrowLeft'){e.preventDefault();goPiece(cur.g,cur.p-1);}
+  else if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();goGroup(cur.g+1);}else if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();goGroup(cur.g-1);}});
+// Themes are shared with the rest of the site.
+function setTheme(t){document.body.dataset.theme=t;document.querySelectorAll('.theme [data-theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.theme===t)));try{localStorage.setItem('nada-theme',t);}catch{}}
+document.querySelectorAll('.theme [data-theme]').forEach(b=>b.onclick=()=>{setTheme(b.dataset.theme);tick();});
+try{const s=localStorage.getItem('nada-theme'),t=s==='green'?'blue':s;if(['blue','yellow','red','light'].includes(t))setTheme(t);}catch{}
+document.getElementById('shadow').onclick=e=>{const off=document.body.classList.toggle('no-shadow');e.currentTarget.setAttribute('aria-pressed',String(!off));};
+document.getElementById('sound').onclick=e=>{sound=!sound;e.currentTarget.setAttribute('aria-pressed',String(sound));e.currentTarget.querySelector('small').textContent=sound?'sound on':'sound off';tick();};
+// Open on the piece or group named in the address, if any.
+const h=location.hash.slice(1);let sg=groups.findIndex(g=>g.id===h),sp=0;
+if(sg<0)groups.forEach((g,gi)=>g.pieces.forEach((p,pi)=>{if(p.id===h){sg=gi;sp=pi;}}));
+if(sg<0){sg=0;sp=0;}
+requestAnimationFrame(()=>{if(sg>0)stage.querySelector(`.group[data-g="${sg}"]`).scrollIntoView();if(sp>0){const t=stage.querySelector(`.group[data-g="${sg}"] .track`);t.scrollLeft=sp*t.clientWidth;}show(sg,sp);});
+</script>
+</body>
+</html>

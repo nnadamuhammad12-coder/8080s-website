@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fafaf8"><title>Muhammad Nada — architecture, design & experiments</title><meta name="description" content="Muhammad Nada's personal space for architecture, design, Ferrum and experiments. Eight sides, one ongoing practice."><link rel="stylesheet" href="style.css?v=10"></head>
+<body>
+<div class="frame" aria-hidden="true"></div>
+<main>
+<section class="landing" aria-label="Muhammad Nada's interactive portfolio">
+<aside class="profile">
+<a class="name" href="#" aria-label="Muhammad Nada home">Muhammad Nada</a><div class="alias">8080na</div>
+<p class="roles"><strong>Architect<br>Artist (sometimes)<br>Multidisciplinary</strong></p>
+<p class="location">Based<br>Everywhere</p>
+<div id="clock" class="world-clocks" aria-label="Current times in Cairo, London and Boston"><div><span>Cairo</span><time id="time-cairo"></time></div><div><span>London</span><time id="time-london"></time></div><div><span>Boston</span><time id="time-boston"></time></div></div>
+<p class="copyright">© muhammad nada <span id="year">2026</span>,<br>always in progress.<br><small class="lit">this literally in progress</small></p>
+<div class="rotation-controls"><button id="spin" aria-pressed="true">auto rotate <span>● on</span></button><button id="left" aria-label="Rotate octagon left">&lt;</button><span class="axis">-- • --</span><button id="right" aria-label="Rotate octagon right">&gt;</button></div>
+</aside>
+<div class="model-area"><canvas id="octagon" aria-label="Spinning translucent octagonal prism. Drag to rotate, or use the rotation buttons."></canvas><div id="labels" aria-label="Explore eight sides"></div></div>
+</section>
+</main>
+<div class="theme-controls" role="group" aria-label="Colour theme"><small>theme & shadow</small><div><button data-theme="blue" aria-label="Turquoise theme"></button><button data-theme="yellow" aria-label="Yellow theme"></button><button data-theme="red" aria-label="Red theme"></button><button data-theme="light" aria-label="Light theme" aria-pressed="true"></button><button id="shadow" aria-label="Toggle shadow" aria-pressed="true">◧</button></div></div>
+<div class="ticker" aria-label="Site updates"><div>EIGHT SIDES <span lang="ja">八つの面</span> <bdi lang="ar">ثمانية أوجه</bdi> /// ARCHITECTURE <span lang="ja">建築</span> <bdi lang="ar">عمارة</bdi> /// FORM <span lang="ja">形</span> <bdi lang="ar">شكل</bdi> /// FUNCTION <span lang="ja">機能</span> <bdi lang="ar">وظيفة</bdi> /// LIGHT + SHADE <span lang="ja">光と影</span> <bdi lang="ar">ضوء وظل</bdi> /// THE SEA <span lang="ja">海</span> <bdi lang="ar">البحر</bdi> /// CLAY + GLASS <span lang="ja">土と硝子</span> <bdi lang="ar">طين وزجاج</bdi> /// BALANCE <span lang="ja">均衡</span> <bdi lang="ar">توازن</bdi> /// REST <span lang="ja">休息</span> <bdi lang="ar">راحة</bdi> /// CAIRO · LONDON · BOSTON <span lang="ja">カイロ・ロンドン・ボストン</span> <bdi lang="ar">القاهرة · لندن · بوسطن</bdi> /// ALWAYS IN PROGRESS <span lang="ja">未完成</span> <bdi lang="ar">قيد الإنجاز</bdi> /// EIGHT SIDES <span lang="ja">八つの面</span> <bdi lang="ar">ثمانية أوجه</bdi> /// ARCHITECTURE <span lang="ja">建築</span> <bdi lang="ar">عمارة</bdi> /// FORM <span lang="ja">形</span> <bdi lang="ar">شكل</bdi> /// FUNCTION <span lang="ja">機能</span> <bdi lang="ar">وظيفة</bdi> /// LIGHT + SHADE <span lang="ja">光と影</span> <bdi lang="ar">ضوء وظل</bdi> /// THE SEA <span lang="ja">海</span> <bdi lang="ar">البحر</bdi> /// CLAY + GLASS <span lang="ja">土と硝子</span> <bdi lang="ar">طين وزجاج</bdi> /// BALANCE <span lang="ja">均衡</span> <bdi lang="ar">توازن</bdi> /// REST <span lang="ja">休息</span> <bdi lang="ar">راحة</bdi> /// CAIRO · LONDON · BOSTON <span lang="ja">カイロ・ロンドン・ボストン</span> <bdi lang="ar">القاهرة · لندن · بوسطن</bdi> /// ALWAYS IN PROGRESS <span lang="ja">未完成</span> <bdi lang="ar">قيد الإنجاز</bdi> /// </div></div>
+<button class="sound" id="sound" aria-pressed="false" aria-label="Toggle interaction sounds"><span>▂ ▄ ▆</span><small>sound off</small></button>
+<dialog id="detail"><button class="close" aria-label="Close section">[ close × ]</button><span id="detail-number"></span><h2 id="detail-title"></h2><div id="detail-body"></div><div class="dialog-nav"><button id="prev-section">← previous</button><button id="next-section">next →</button></div></dialog>
+<dialog id="stage-two" aria-label="Function — El Gouna"><div class="video-header"><span>Function / El Gouna</span><button id="close-video" aria-label="Close video">[ close × ]</button></div><video id="trip-video" controls playsinline preload="none" aria-label="El Gouna: fishing, wakeboarding, camping and spearfishing"><source src="assets/el-gouna.mp4" type="video/mp4">Your browser does not support this video.</video><p class="video-caption">fishing / wakeboarding / camping / spearfishing</p><p id="video-error" hidden>The video could not load. <a href="assets/el-gouna.mp4">Open the film directly ↗</a></p></dialog>
+<script type="module" src="main.mjs?v=14"></script>
+</body></html>

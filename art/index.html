@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Art — Muhammad Nada</title><meta name="description" content="Art by Muhammad Nada — coming soon.">
+<style>
+:root{--paper:#fafaf8;--ink:#171817;--muted:#7a7c78;--a:#d9d3c4;--b:#c9cfd2;--c:#e4c9bf;--h:"Helvetica Neue",Helvetica,Arial,sans-serif}
+body[data-theme=blue]{--paper:#0e9aaa;--ink:#fff;--muted:#c9eff3;--a:#5fc6d1;--b:#2fb0bf;--c:#9fe0e6}
+body[data-theme=yellow]{--paper:#efe5a5;--ink:#171817;--muted:#6d6640;--a:#e2d27a;--b:#f6efc2;--c:#d9c77a}
+body[data-theme=red]{--paper:#efb7ae;--ink:#fff;--muted:#f8e65e;--a:#e69a8e;--b:#f6d0c9;--c:#d98074}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font:13px/1.4 var(--h);color:var(--ink);background:var(--paper);overflow:hidden}
+a{color:inherit;text-decoration:none}
+.brand{position:fixed;top:34px;left:36px;font-size:17px;z-index:3}
+.back{position:fixed;top:36px;left:max(15%,200px);font-size:11px;color:var(--muted);z-index:3}
+.topnav{position:fixed;top:38px;right:36px;display:flex;gap:18px;font-size:12px;color:var(--muted);z-index:3}
+.blur{position:fixed;inset:0;overflow:hidden}
+.blur i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.85;animation:drift 18s ease-in-out infinite alternate}
+.blur i:nth-child(1){width:46vw;height:46vw;left:12vw;top:14vh;background:var(--a)}
+.blur i:nth-child(2){width:38vw;height:38vw;right:10vw;top:30vh;background:var(--b);animation-delay:-6s}
+.blur i:nth-child(3){width:30vw;height:30vw;left:38vw;bottom:-6vh;background:var(--c);animation-delay:-11s}
+.veil{position:fixed;inset:0;backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+.soon{position:fixed;inset:0;display:grid;place-items:center;text-align:center;z-index:2}
+.soon h1{margin:0;font-weight:400;font-size:clamp(28px,4.4vw,56px);letter-spacing:-.02em}
+.soon p{margin:10px 0 0;color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:lowercase}
+@keyframes drift{to{transform:translate(4vw,-3vh) scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.blur i{animation:none}}
+</style></head>
+<body><a class="brand" href="/">Muhammad Nada</a><a class="back" href="/">← index</a>
+<nav class="topnav" aria-label="Site"><a href="/">Home</a><a href="/form/">Info</a><a href="/academic/">Archive</a></nav>
+<div class="blur" aria-hidden="true"><i></i><i></i><i></i></div><div class="veil" aria-hidden="true"></div>
+<main class="soon"><div><h1>coming soon</h1><p>art</p></div></main>
+<script>try{const t=localStorage.getItem('nada-theme');if(['blue','yellow','red'].includes(t))document.body.dataset.theme=t;}catch{}</script>
+</body></html>
