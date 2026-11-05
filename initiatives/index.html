@@ -27,7 +27,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
 .lab{pointer-events:auto;position:absolute;transform:translate(-50%,-50%);padding:4px 10px;font:11px 'Courier New',monospace;white-space:nowrap;border:1px solid var(--line);border-radius:2px;background:var(--panel);color:var(--ink);cursor:pointer;transition:background .15s,color .15s}
 .lab:hover,.lab[data-hot]{background:var(--ink);color:var(--paper);z-index:9}
 .lab.soon::after{content:'coming soon';position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);font-size:9px;color:var(--muted);background:var(--paper);padding:0 4px}
-.hint{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}
+.choices{position:absolute;transform:translateX(-50%);display:grid;gap:4px;padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:2px;z-index:20;pointer-events:auto;min-width:170px}.choices a{display:flex;justify-content:space-between;gap:14px;padding:5px 8px;font-size:11px;color:var(--ink)}.choices a small{color:var(--muted);font-size:9px}.choices a:hover{background:var(--ink);color:var(--paper)}.choices a:hover small{color:var(--paper)}.intro li a.nolink{cursor:default}.intro li a.nolink:hover{color:var(--muted)}.hint{position:fixed;bottom:36px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}
 @media (max-width:760px){.intro{top:96px;transform:none;left:36px}.stage{left:0;top:240px}}
 </style><meta name="copyright" content="© Muhammad Nada. All rights reserved."><meta name="author" content="Muhammad Nada"><script src="/guard.js" defer></script></head>
 <body><div class="frame" aria-hidden="true"></div>
@@ -36,4 +36,4 @@ canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
 <section class="intro"><h1>initiatives</h1><p>work beyond the studio. choose a side.</p><ol id="list"></ol><p class="note">i had a hand in the creative process behind the sites above, and in some of what they put out. they are the work of many teams and many people.</p></section>
 <div class="stage"><canvas id="oct" aria-label="A small spinning octagon; each side is an initiative"></canvas><div id="labels"></div></div>
 <p class="hint">hover to hold · drag to turn · click to open</p>
-<script type="module" src="page.mjs?v=2"></script></body></html>
+<script type="module" src="page.mjs?v=3"></script></body></html>
