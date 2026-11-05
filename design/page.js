@@ -31,17 +31,32 @@ const groups=[
   {id:'ceramics-pair',photo:'ceramics.webp',w:1157,h:1086,alt:'A blue glazed ceramic vessel beside a tall unglazed curving clay form',sketch:'ceramics',note:'ceramics',
    caption:['ceramics','A glazed vessel and a raw clay form','Clay and glaze'],
    desc:'I made these in Egypt, at a local artisan’s warsha my grandmother connected me with. On my way there, through east Cairo, my mind was warped by the cultural and economic split I could see, and by how wide the gap between rich and poor is, passing the slums on the way. That day I wanted to make something calming for the house that still held that warped feeling.',
-   sk:{plan:200,section:140,elevation:250}}]}
+   sk:{plan:200,section:140,elevation:250}}]},
+ {id:'light-box',name:'light box',pieces:[
+  {id:'light-box-1',photo:'sm-lightbox-1.webp',w:1874,h:1468,alt:'A small timber and acrylic box model casting a hard shadow, a scale figure inside',caption:['light box', '', 'Timber frame, clear acrylic, foam, wire'],desc:'A first-year sketch model: a timber frame wrapped in clear acrylic, with a carved foam ceiling, circular openings and a bent wire screen on one face.'},
+  {id:'light-box-2',photo:'sm-lightbox-4.webp',w:1230,h:1332,alt:'The wire face of the box model',caption:['light box', 'the wire face', 'Timber frame, clear acrylic, foam, wire'],desc:'The front face: a single bent wire laid over a dark panel.'},
+  {id:'light-box-3',photo:'sm-lightbox-2.webp',w:1164,h:909,alt:'Inside the box model, a figure under the carved ceiling',caption:['light box', 'inside', 'Timber frame, clear acrylic, foam, wire'],desc:'Inside, under the carved foam ceiling.'},
+  {id:'light-box-4',photo:'sm-lightbox-3.webp',w:1588,h:2118,alt:'Close view through the acrylic of the box model',caption:['light box', 'close', 'Timber frame, clear acrylic, foam, wire'],desc:'Through the acrylic: the foam ceiling and the circular cut-outs.'}]},
+ {id:'folded-roof',name:'folded roof',pieces:[
+  {id:'folded-roof-1',photo:'sm-folded-roof-1.webp',w:1872,h:1114,alt:'A folded card roof raised on timber legs and thin copper rods, a scale figure beside it',caption:['folded roof', '', 'Folded card roof on timber and copper legs'],desc:'A first-year sketch model: a faceted, folded card roof held up on angled timber legs and thin copper rods.'},
+  {id:'folded-roof-2',photo:'sm-folded-roof-2.webp',w:1838,h:2052,alt:'Six views of the folded roof model',caption:['folded roof', 'six views', 'Folded card roof on timber and copper legs'],desc:'The same model from six angles.'}]},
+ {id:'shadow-model',name:'shadow model',pieces:[
+  {id:'shadow-1',photo:'sm-shadow-1.webp',w:590,h:476,alt:'Shadow model seen from above, dark planes and thread',caption:['shadow model', 'minimal support', 'Card planes, thread, light'],desc:'I chose this sketch model because I was drawn to how the model relied on very minimal structural support. The beams were few, but strategically placed. It made me question the need for excessive superstructures in architecture. Sometimes, efficiency and elegance come from restraint.'},
+  {id:'shadow-2',photo:'sm-shadow-2.webp',w:736,h:442,alt:'Silhouette of the shadow model roof with a figure',caption:['shadow model', 'the roof', 'Card planes, thread, light'],desc:'What stood out to me most was the roof. Its form broke away from conventional design. It wasn’t just about looking different; its shape and the way it operated challenged typical expectations. That obscure and almost sculptural presence gave the whole structure an identity.'},
+  {id:'shadow-3',photo:'sm-shadow-3.webp',w:550,h:458,alt:'The shadow model from above with a figure inside',caption:['shadow model', 'an experience', 'Card planes, thread, light'],desc:'This model felt like more than just a form. It shaped an experience. Between the lighting, the irregular roof, and the minimal structural system, it all came together to create a space that felt both intentional and experimental. That’s what made me want to take it further.'},
+  {id:'shadow-4',photo:'sm-shadow-4.webp',w:717,h:451,alt:'The shadow model lit from behind, grey light through the planes',caption:['shadow model', 'light', 'Card planes, thread, light'],desc:'While taking pictures of the model, I realised how dramatically shadows and direct light can shift the feeling of a space. It wasn’t something I planned for, but seeing how the light carved through the structure and created contrast made me start thinking about atmosphere as a design element in itself.'}]},
+ {id:'conceptual-sketches',name:'conceptual sketches',pieces:[
+  {id:'sketches',photo:'sm-sketches.webp',w:1940,h:1195,alt:'Four loose, continuous-line conceptual sketches',caption:['conceptual sketches','','Pen on paper'],desc:'Four loose conceptual sketches, drawn alongside the models.'}]}
 ];
 const label={plan:'plan',section:'section a—a',elevation:'elevation'};
 const fig=(p,k)=>`<figure><img src="${ART}sketch/${p.sketch}-${k}.png" alt="${label[k]} sketch" style="width:${p.sk[k]}px" loading="lazy"><figcaption>${label[k]}</figcaption></figure>`;
 const stage=document.getElementById('stage'),nav=document.getElementById('groups');
 stage.innerHTML=groups.map((g,gi)=>`<section class="group${g.pieces.length<2?' single':''}" id="${g.id}" data-g="${gi}" aria-label="${g.name}"><h2>${g.name}</h2>
   <div class="track">${g.pieces.map((p,pi)=>`<article class="piece" id="${p.id}" data-g="${gi}" data-p="${pi}" aria-label="${p.caption[0]}">
-    <div class="set"><div class="sk left">${fig(p,'plan')}${fig(p,'section')}</div>
+    <div class="set"><div class="sk left">${p.sk?fig(p,'plan')+fig(p,'section'):''}</div>
       <figure class="photo"><img src="${ART}${p.photo}" alt="${p.alt}" width="${p.w}" height="${p.h}" ${gi||pi?'loading="lazy"':''}></figure>
       <div class="sk right"></div></div>
-    <div class="m"><div class="mnote">${NOTES[p.note]}</div><strong>${p.caption[0]}</strong>${p.desc}</div></article>`).join('')}</div>
+    <div class="m"><div class="mnote">${NOTES[p.note]||''}</div><strong>${p.caption[0]}</strong>${p.desc}</div></article>`).join('')}</div>
   <button class="side prev" aria-label="Previous piece"><span class="i">‹</span><span class="t">back</span></button>
   <button class="side next" aria-label="Next piece"><span class="t">next</span><span class="i">›</span></button>
   <div class="dots${g.pieces.length<2?' single':''}">${g.pieces.map((p,pi)=>`<button aria-label="Show ${p.caption[0]}" data-p="${pi}"></button>`).join('')}</div></section>`).join('');
@@ -51,7 +66,7 @@ function tick(f=460){if(!sound)return;try{audio??=new AudioContext();const o=aud
 function show(gi,pi){if(cur.g===gi&&cur.p===pi)return;cur={g:gi,p:pi};along[gi]=pi;const g=groups[gi],p=g.pieces[pi];
   nav.querySelectorAll('a').forEach((a,k)=>a.setAttribute('aria-current',String(k===gi)));
   const c=document.getElementById('caption');c.innerHTML='<strong></strong><span></span><br><span></span><br><i class="sig" role="img" aria-label="Muhammad Nada, signature"></i>';c.querySelector('strong').textContent=p.caption[0];c.querySelectorAll('span').forEach((s,k)=>s.textContent=p.caption[k+1]);
-  document.getElementById('desc').textContent=p.desc;document.getElementById('note').innerHTML=NOTES[p.note];
+  document.getElementById('desc').textContent=p.desc;document.getElementById('note').innerHTML=NOTES[p.note]||'';
   document.getElementById('counter').textContent=`${pi+1} / ${g.pieces.length}`;
   const sec=stage.querySelector(`.group[data-g="${gi}"]`);sec.querySelector('.prev').disabled=pi===0;sec.querySelector('.next').disabled=pi===g.pieces.length-1;
   sec.querySelectorAll('.dots button').forEach((b,k)=>b.setAttribute('aria-current',String(k===pi)));
