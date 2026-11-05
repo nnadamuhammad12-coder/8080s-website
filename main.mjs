@@ -88,7 +88,12 @@ function placeCard(){
   dialog.style.left=`${Math.round(x)}px`;dialog.style.top=`${Math.round(y)}px`;
 }
 const videoDialog=$('#stage-two'),video=$('#trip-video');
-function openVideo(){videoDialog.showModal();history.replaceState(null,'','#function');video.play().catch(()=>{});tickSound();}
+const VIDEO_SRC='/assets/el-gouna/index.m3u8';let videoReady=false;
+function loadVideo(){if(videoReady)return;videoReady=true;
+  if(video.canPlayType('application/vnd.apple.mpegurl')){video.src=VIDEO_SRC;return;}
+  if(window.Hls&&window.Hls.isSupported()){const h=new window.Hls({enableWorker:false,startLevel:-1,capLevelToPlayerSize:false});h.loadSource(VIDEO_SRC);h.attachMedia(video);h.on(window.Hls.Events.ERROR,(e,d)=>{if(d.fatal)$('#video-error').hidden=false;});return;}
+  $('#video-error').hidden=false;}
+function openVideo(){loadVideo();videoDialog.showModal();history.replaceState(null,'','#function');video.play().catch(()=>{});tickSound();}
 function closeVideo(){video.pause();videoDialog.close();history.replaceState(null,'',location.pathname);}
 $('#close-video').onclick=closeVideo;videoDialog.addEventListener('cancel',()=>{video.pause();history.replaceState(null,'',location.pathname);});videoDialog.addEventListener('close',()=>video.pause());video.addEventListener('error',()=>$('#video-error').hidden=false);
 function closeSection(){if(dialog.open)dialog.close();pinned=-1;contactLock=false;history.replaceState(null,'',location.pathname);}

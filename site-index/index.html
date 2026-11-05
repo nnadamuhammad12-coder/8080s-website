@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Index — Muhammad Nada</title><meta name="description" content="Index of every page on muhammadnada.com.">
+<style>
+:root{--paper:#fafaf8;--ink:#171817;--muted:#838581;--grid:rgba(90,90,80,.037);--line:#c8c9c3}
+body[data-theme=blue]{--paper:#0e9aaa;--ink:#fff;--muted:#c9eff3;--grid:rgba(255,255,255,.08);--line:#7fd3dc}
+body[data-theme=yellow]{--paper:#efe5a5;--ink:#171817;--muted:#6d6640;--grid:rgba(70,50,0,.05);--line:#b9ac6b}
+body[data-theme=red]{--paper:#efb7ae;--ink:#fff;--muted:#f8e65e;--grid:rgba(80,20,10,.05);--line:#bd847c}
+*{box-sizing:border-box}html,body{margin:0}
+body{min-height:100vh;background-color:var(--paper);color:var(--ink);font:13px/1.55 'Courier New',monospace;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:8px 8px}
+a{color:inherit;text-decoration:none}
+.frame{position:fixed;inset:24px;border:1px solid var(--grid);pointer-events:none}
+.brand{position:fixed;top:30px;left:36px;font-size:17px;z-index:3}
+.back{position:fixed;top:33px;left:max(15%,200px);font-size:11px;color:var(--muted);z-index:3}
+.topnav{position:fixed;top:34px;right:36px;display:flex;gap:18px;font-size:12px;color:var(--muted);z-index:3}
+.topnav a:hover,.back:hover{color:var(--ink)}
+main{padding:120px 15% 90px;max-width:1100px}
+h1{font-size:28px;letter-spacing:-1.2px;font-weight:400;margin:0 0 40px}
+.cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:34px 48px}
+h2{font-size:11px;font-weight:400;color:var(--muted);margin:0 0 10px;letter-spacing:.06em}
+ol{list-style:none;margin:0;padding:0;counter-reset:i}
+li{counter-increment:i;margin:3px 0}
+li a{display:inline-flex;gap:10px}
+li a::before{content:counter(i,decimal-leading-zero);color:var(--muted);opacity:.7}
+li a:hover{text-decoration:underline;text-underline-offset:3px}
+li small{color:var(--muted);margin-left:6px}
+@media(max-width:600px){main{padding:100px 28px 60px}.back{left:auto;right:36px;top:58px}}
+</style></head>
+<body><div class="frame" aria-hidden="true"></div>
+<a class="brand" href="/">Muhammad Nada</a><a class="back" href="/">← home</a>
+<nav class="topnav" aria-label="Site"><a href="/">Home</a><a href="/form/">Info</a><a href="/academic/">Archive</a></nav>
+<main><h1>index</h1><div class="cols">
+<section><h2>academic</h2><ol>
+<li><a href="/academic/#project-1">Check-in / Check-out</a></li>
+<li><a href="/academic/#project-2">rePLAY, New Road</a></li>
+<li><a href="/academic/#project-3">Serpentine Pavilion</a></li></ol></section>
+<section><h2>initiatives</h2><ol>
+<li><a href="/initiatives/">all initiatives</a></li>
+<li><a href="/initiatives/alchemy/">Alchemy <small>mn residence</small></a></li></ol></section>
+<section><h2>work</h2><ol>
+<li><a href="/design/">design <small>ceramics</small></a></li>
+<li><a href="/art/">art <small>coming soon</small></a></li>
+<li><a href="/notes/">notes <small>3d scans soon</small></a></li>
+<li><a href="/form/">form <small>coming soon</small></a></li></ol></section>
+<section><h2>more</h2><ol>
+<li><a href="/#function">function <small>el gouna film</small></a></li>
+<li><a href="/#contact">contact</a></li>
+<li><a href="/">home <small>the octagon</small></a></li></ol></section>
+</div></main>
+<script src="page.js"></script>
+</body></html>
