@@ -1,6 +1,6 @@
 import {rotate,project,segments,segmentFaces,OUTER_FACE} from '/geometry.mjs?v=9';
-const ITEMS=[['Nuri','https://nurihair.care/'],['Alchemy',null],['Rowad','https://rowad-rme.com/'],['TDF+','https://tdfplus.design/'],['Beltone','https://www.beltoneholding.com/en'],['LOGIC','https://logic-consulting.com/'],['MUN',null],['Outreach',null]];
-const CHOICES={1:[['Analogue ↗','https://analogueegypt.com/','website'],['Kyme','/initiatives/alchemy/','mn residence']]};
+const ITEMS=[['Nuri','https://nurihair.care/'],['Alchemy',null],['Rowad',null],['TDF+','https://tdfplus.design/'],['Beltone','https://www.beltoneholding.com/en'],['LOGIC','https://logic-consulting.com/'],['MUN',null],['Outreach',null]];
+const CHOICES={2:[['Rowad ↗','https://rowad-rme.com/','website'],['Project ↗','https://www.egyptindependent.com/giza-zoo-gains-new-life-after-joining-with-orman-botanical-garden/','giza zoo + orman garden']],1:[['Analogue ↗','https://analogueegypt.com/','website'],['Kyme','/initiatives/alchemy/','mn residence']]};
 const pop=document.createElement('div');pop.className='choices';pop.hidden=true;let popFor=-1;
 function showChoices(i){if(popFor===i){pop.hidden=true;popFor=-1;hold=false;return;}popFor=i;pop.innerHTML='';for(const [t,h,sub] of CHOICES[i]){const a=document.createElement('a');a.href=h;a.innerHTML=`${t}<small>${sub}</small>`;if(ext(h)){a.target='_blank';a.rel='noopener noreferrer';}pop.append(a);}pop.hidden=false;hold=true;}
 addEventListener('click',e=>{if(popFor>=0&&!e.target.closest('.choices')&&!e.target.closest('.lab')){pop.hidden=true;popFor=-1;hold=false;}});
