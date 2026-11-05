@@ -26,3 +26,5 @@ dialog.card .close{font-size:10px}
 .copyright .lit{display:block;font-size:9px;margin-top:3px;opacity:.75}
 .ticker{display:none!important}
 img{-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none}
+
+.video-actions{display:flex;gap:10px;align-items:center;pointer-events:auto}.stage-link{color:#fff;text-decoration:none;background:#1119;border:1px solid #ffffff50;padding:7px 12px;font-size:12px}.stage-link:hover{background:#fff;color:#111}
