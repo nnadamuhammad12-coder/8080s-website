@@ -90,8 +90,8 @@ function placeCard(){
 const videoDialog=$('#stage-two'),video=$('#trip-video');
 const VIDEO_SRC='/assets/el-gouna/index.m3u8';let videoReady=false;
 function loadVideo(){if(videoReady)return;videoReady=true;
+  if(window.Hls&&window.Hls.isSupported()){const h=new window.Hls({enableWorker:false,capLevelToPlayerSize:false});h.loadSource(VIDEO_SRC);h.attachMedia(video);h.on(window.Hls.Events.MANIFEST_PARSED,()=>{if(videoDialog.open)video.play().catch(()=>{});});h.on(window.Hls.Events.ERROR,(e,d)=>{if(d.fatal)$('#video-error').hidden=false;});return;}
   if(video.canPlayType('application/vnd.apple.mpegurl')){video.src=VIDEO_SRC;return;}
-  if(window.Hls&&window.Hls.isSupported()){const h=new window.Hls({enableWorker:false,startLevel:-1,capLevelToPlayerSize:false});h.loadSource(VIDEO_SRC);h.attachMedia(video);h.on(window.Hls.Events.ERROR,(e,d)=>{if(d.fatal)$('#video-error').hidden=false;});return;}
   $('#video-error').hidden=false;}
 function openVideo(){loadVideo();videoDialog.showModal();history.replaceState(null,'','#function');video.play().catch(()=>{});tickSound();}
 function closeVideo(){video.pause();videoDialog.close();history.replaceState(null,'',location.pathname);}
