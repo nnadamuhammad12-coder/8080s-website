@@ -20,7 +20,7 @@ a{color:inherit;text-decoration:none}
 .intro li{counter-increment:i;margin:2px 0}
 .intro li a{display:inline-flex;gap:10px;color:var(--muted)}
 .intro li a::before{content:counter(i,decimal-leading-zero);opacity:.6}
-.intro li a.sub{margin-left:10px;font-size:11px}.intro li a.sub::before{content:none}.intro li a:hover,.intro li a[data-hot]{color:var(--ink)}
+.intro .note{margin:26px 0 0;font-size:10.5px;line-height:1.6;color:var(--muted);max-width:270px}.intro li a.sub{margin-left:10px;font-size:11px}.intro li a.sub::before{content:none}.intro li a:hover,.intro li a[data-hot]{color:var(--ink)}
 .stage{position:fixed;inset:0;left:28%}
 canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
 #labels{position:absolute;inset:0;pointer-events:none}
@@ -33,7 +33,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
 <body><div class="frame" aria-hidden="true"></div>
 <a class="brand" href="/">Muhammad Nada</a><a class="back" href="/">← index</a>
 <nav class="topnav" aria-label="Site"><a href="/">Home</a><a href="/form/">Info</a><a href="/academic/">Archive</a></nav>
-<section class="intro"><h1>initiatives</h1><p>work beyond the studio. choose a side.</p><ol id="list"></ol></section>
+<section class="intro"><h1>initiatives</h1><p>work beyond the studio. choose a side.</p><ol id="list"></ol><p class="note">a note on the linked sites: i directed the websites above for each of these companies. they were built with the help of many teams and people, but the direction, and much of the input, was mine.</p></section>
 <div class="stage"><canvas id="oct" aria-label="A small spinning octagon; each side is an initiative"></canvas><div id="labels"></div></div>
 <p class="hint">hover to hold · drag to turn · click to open</p>
 <script type="module" src="page.mjs?v=2"></script></body></html>
