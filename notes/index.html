@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Notes — Muhammad Nada</title><meta name="description" content="Notes by Muhammad Nada — 3d scans coming soon.">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Notes — Muhammad Nada</title><meta name="description" content="Notes by Muhammad Nada — pen sketches, and 3d scans coming soon.">
 
 <style>
 @font-face{font-family:'Permanent Marker';src:url(/assets/fonts/permanent-marker.woff2) format('woff2');font-display:swap}
@@ -7,15 +7,22 @@
 body[data-theme=blue]{--paper:#0e9aaa;--ink:#fff;--muted:#c9eff3;--grid:rgba(255,255,255,.08);--marker:#fff}
 body[data-theme=yellow]{--paper:#efe5a5;--ink:#171817;--muted:#6d6640;--grid:rgba(70,50,0,.05);--marker:#171817}
 body[data-theme=red]{--paper:#efb7ae;--ink:#fff;--muted:#f8e65e;--grid:rgba(80,20,10,.05);--marker:#fff}
-*{box-sizing:border-box}html,body{margin:0;height:100%}
-body{background-color:var(--paper);color:var(--ink);font:13px/1.55 'Courier New',monospace;overflow:hidden;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:8px 8px}
+*{box-sizing:border-box}html,body{margin:0}
+body{background-color:var(--paper);color:var(--ink);font:13px/1.55 'Courier New',monospace;overflow-x:hidden;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:8px 8px}
 a{color:inherit;text-decoration:none}
 .frame{position:fixed;inset:24px;border:1px solid var(--grid);pointer-events:none}
 .brand{position:fixed;top:30px;left:36px;font-size:17px;z-index:3}
 .back{position:fixed;top:33px;left:max(15%,200px);font-size:11px;color:var(--muted);z-index:3}
 .topnav{position:fixed;top:34px;right:36px;display:flex;gap:18px;font-size:12px;color:var(--muted);z-index:3}
 .topnav a:hover,.back:hover{color:var(--ink)}
-main{position:fixed;inset:0;display:grid;place-items:center}
+main{position:relative;height:100vh;display:grid;place-items:center}
+.hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted)}
+.sketches{padding:150px 18% 160px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:110px 70px;align-items:center}
+.sketches h2{grid-column:1/-1;margin:0;font-size:11px;font-weight:400;color:var(--muted);letter-spacing:.06em}
+.sketches figure{margin:0}.sketches img{width:100%;height:auto;display:block}
+.sketches figcaption{margin-top:12px;font-size:10px;color:var(--muted)}
+body[data-theme=blue] .sketches img,body[data-theme=red] .sketches img{filter:invert(1)}
+@media(max-width:700px){.sketches{grid-template-columns:1fr;padding:30px 28px 100px;gap:60px}}
 .scrawl{font-family:'Permanent Marker','Marker Felt','Comic Sans MS',cursive;color:var(--marker);font-size:clamp(44px,10.5vw,170px);line-height:.95;white-space:nowrap;transform:rotate(-7deg);
   clip-path:inset(0 100% 0 0);animation:write 2.4s cubic-bezier(.6,.05,.35,1) .3s forwards;filter:url(#rough);opacity:.94;letter-spacing:-.01em}
 .scrawl span{display:block}.scrawl span:nth-child(2){margin-left:.9em;font-size:.82em;transform:rotate(2.5deg)}
@@ -30,6 +37,7 @@ main{position:fixed;inset:0;display:grid;place-items:center}
 <nav class="topnav" aria-label="Site"><a href="/">Home</a><a href="/form/">Info</a><a href="/academic/">Archive</a></nav>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter></svg>
 <main><h1 class="scrawl" aria-label="3d scans coming soon"><span>3d scans</span><span>coming soon</span></h1>
-<svg class="under" viewBox="0 0 1000 60" aria-hidden="true"><path d="M20 38 C 200 22, 420 30, 620 26 S 900 18, 980 30"/></svg></main>
+<svg class="under" viewBox="0 0 1000 60" aria-hidden="true"><path d="M20 38 C 200 22, 420 30, 620 26 S 900 18, 980 30"/></svg><span class="hint">scroll for sketches ↓</span></main>
+<section class="sketches" aria-label="Pen and paper sketches"><h2>pen on paper — conceptual sketches</h2><figure><img src="/assets/notes/sketch-1.png" alt="Loose continuous-line conceptual sketch 1" loading="lazy" draggable="false"><figcaption>01</figcaption></figure><figure><img src="/assets/notes/sketch-2.png" alt="Loose continuous-line conceptual sketch 2" loading="lazy" draggable="false"><figcaption>02</figcaption></figure><figure><img src="/assets/notes/sketch-3.png" alt="Loose continuous-line conceptual sketch 3" loading="lazy" draggable="false"><figcaption>03</figcaption></figure><figure><img src="/assets/notes/sketch-4.png" alt="Loose continuous-line conceptual sketch 4" loading="lazy" draggable="false"><figcaption>04</figcaption></figure></section>
 <script src="page.js"></script>
 </body></html>

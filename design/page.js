@@ -27,11 +27,6 @@ ceramics:svg('Diagram: the glazed vessel in elevation, with a callout into its w
 };
 // ---- Content: groups of pieces. Add a piece to a group, or a new group (e.g. Digital art), and it slots in. ----
 const groups=[
- {id:'ceramics',name:'ceramics',pieces:[
-  {id:'ceramics-pair',photo:'ceramics.webp',w:1157,h:1086,alt:'A blue glazed ceramic vessel beside a tall unglazed curving clay form',sketch:'ceramics',note:'ceramics',
-   caption:['ceramics','A glazed vessel and a raw clay form','Clay and glaze'],
-   desc:'I made these in Egypt, at a local artisan’s warsha my grandmother connected me with. On my way there, through east Cairo, my mind was warped by the cultural and economic split I could see, and by how wide the gap between rich and poor is, passing the slums on the way. That day I wanted to make something calming for the house that still held that warped feeling.',
-   sk:{plan:200,section:140,elevation:250}}]},
  {id:'light-box',name:'light box',pieces:[
   {id:'light-box-1',photo:'sm-lightbox-1.webp',w:1874,h:1468,alt:'A small timber and acrylic box model casting a hard shadow, a scale figure inside',caption:['light box', '', 'Timber frame, clear acrylic, foam, wire'],desc:'A first-year sketch model: a timber frame wrapped in clear acrylic, with a carved foam ceiling, circular openings and a bent wire screen on one face.'},
   {id:'light-box-2',photo:'sm-lightbox-4.webp',w:1230,h:1332,alt:'The wire face of the box model',caption:['light box', 'the wire face', 'Timber frame, clear acrylic, foam, wire'],desc:'The front face: a single bent wire laid over a dark panel.'},
