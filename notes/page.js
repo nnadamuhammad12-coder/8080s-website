@@ -1,6 +1,6 @@
 try{const t=localStorage.getItem('nada-theme');if(['blue','yellow','red'].includes(t))document.body.dataset.theme=t;}catch{}
 // add new sketches here: [file, native width]
-const SK=[['sketch-1.png',704],['sketch-2.png',741],['sketch-3.png',936],['sketch-4.png',682],['sketch-5.png',1554],['sketch-6.png',1569],['sketch-7.png',1387],['sketch-8.png',1362],['sketch-9.png',1481]];
+const SK=[['sketch-1.png',704],['sketch-2.png',741],['sketch-3.png',936],['sketch-4.png',682],['sketch-5.png',1554],['sketch-6.png',1569],['sketch-7.png',1387],['sketch-8.png',1362],['sketch-9.png',1481],['sketch-10.png',1550]];
 const field=document.getElementById('drift');
 const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const items=SK.map(([f,nw],i)=>{
