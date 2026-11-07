@@ -7,7 +7,7 @@ const items=SK.map(([f,nw],i)=>{
   const fig=document.createElement('figure');fig.className='sk';
   const img=new Image();img.src='/assets/notes/'+f;img.alt='Conceptual sketch '+(i+1);img.draggable=false;img.decoding='async';
   fig.appendChild(img);field.appendChild(fig);
-  const w=Math.round(nw*(.115+((i*41)%5)*.008));fig.style.width=w+'px';
+  const w=Math.round(nw*(.085+((i*41)%5)*.006));fig.style.width=w+'px';
   return {fig,w,nw,x:Math.random(),lane:(i+.5)/SK.length,sp:12+((i*37)%10),ph:i*1.7,paused:false};
 });
 items.forEach(it=>{
