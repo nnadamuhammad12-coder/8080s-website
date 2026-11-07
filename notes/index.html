@@ -18,13 +18,14 @@ a{color:inherit;text-decoration:none}
 .drift h1{position:fixed;left:36px;bottom:34px;margin:0;font-size:20px;font-weight:400;letter-spacing:-.8px;z-index:3}
 .drift h1 span{display:block;font-size:10px;color:var(--muted);letter-spacing:.06em}
 .sk{position:absolute;left:0;top:0;margin:0;will-change:transform;cursor:zoom-in}
-.sk img{display:block;width:100%;height:auto;pointer-events:none}
+.sk img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
 .sk.open{z-index:5;cursor:zoom-out}
 body[data-theme=blue] .sk img,body[data-theme=red] .sk img{filter:invert(1)}
+@media(max-width:700px){.back{display:none}}
 </style><meta name="copyright" content="© Muhammad Nada. All rights reserved."><meta name="author" content="Muhammad Nada"><script src="/guard.js" defer></script></head>
 <body><div class="frame" aria-hidden="true"></div>
 <a class="brand" href="/">Muhammad Nada</a><a class="back" href="/">← index</a>
 <nav class="topnav" aria-label="Site"><a href="/">Home</a><a href="/form/">Info</a><a href="/academic/">Archive</a></nav>
 <main class="drift" id="drift" aria-label="Notes — conceptual sketches"><h1>notes<span>conceptual sketches — pen on paper</span></h1></main>
-<script src="/notes/page.js?v=8"></script>
+<script src="/notes/page.js?v=11"></script>
 </body></html>
