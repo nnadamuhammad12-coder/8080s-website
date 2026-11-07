@@ -14,16 +14,17 @@ a{color:inherit;text-decoration:none}
 .back{position:fixed;top:33px;left:max(15%,200px);font-size:11px;color:var(--muted);z-index:3}
 .topnav{position:fixed;top:34px;right:36px;display:flex;gap:18px;font-size:12px;color:var(--muted);z-index:3}
 .topnav a:hover,.back:hover{color:var(--ink)}
-.sketches{padding:120px 18% 160px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:110px 70px;align-items:center}
-.sketches h1{grid-column:1/-1;justify-self:start;margin:0 0 -70px;font-size:28px;letter-spacing:-1.2px;font-weight:400}.sketches h2{grid-column:1/-1;justify-self:start;margin:0;font-size:11px;font-weight:400;color:var(--muted);letter-spacing:.06em}
-.sketches figure{margin:0}.sketches img{width:100%;height:auto;display:block}
-.sketches figcaption{margin-top:12px;font-size:10px;color:var(--muted)}
-body[data-theme=blue] .sketches img,body[data-theme=red] .sketches img{filter:invert(1)}
-@media(max-width:700px){.sketches{grid-template-columns:1fr;padding:30px 28px 100px;gap:60px}}
+.drift{position:fixed;inset:0;overflow:hidden}
+.drift h1{position:fixed;left:36px;bottom:34px;margin:0;font-size:20px;font-weight:400;letter-spacing:-.8px;z-index:3}
+.drift h1 span{display:block;font-size:10px;color:var(--muted);letter-spacing:.06em}
+.sk{position:absolute;left:0;top:0;margin:0;will-change:transform;cursor:zoom-in}
+.sk img{display:block;width:100%;height:auto;pointer-events:none}
+.sk.open{z-index:5;cursor:zoom-out}
+body[data-theme=blue] .sk img,body[data-theme=red] .sk img{filter:invert(1)}
 </style><meta name="copyright" content="© Muhammad Nada. All rights reserved."><meta name="author" content="Muhammad Nada"><script src="/guard.js" defer></script></head>
 <body><div class="frame" aria-hidden="true"></div>
 <a class="brand" href="/">Muhammad Nada</a><a class="back" href="/">← index</a>
 <nav class="topnav" aria-label="Site"><a href="/">Home</a><a href="/form/">Info</a><a href="/academic/">Archive</a></nav>
-<main class="sketches" aria-label="Notes — conceptual sketches"><h1>notes</h1><h2>conceptual sketches — pen on paper</h2><figure><img src="/assets/notes/sketch-1.png" alt="Loose continuous-line conceptual sketch 1" loading="lazy" draggable="false"><figcaption>01</figcaption></figure><figure><img src="/assets/notes/sketch-2.png" alt="Loose continuous-line conceptual sketch 2" loading="lazy" draggable="false"><figcaption>02</figcaption></figure><figure><img src="/assets/notes/sketch-3.png" alt="Loose continuous-line conceptual sketch 3" loading="lazy" draggable="false"><figcaption>03</figcaption></figure><figure><img src="/assets/notes/sketch-4.png" alt="Loose continuous-line conceptual sketch 4" loading="lazy" draggable="false"><figcaption>04</figcaption></figure></main>
+<main class="drift" id="drift" aria-label="Notes — conceptual sketches"><h1>notes<span>conceptual sketches — pen on paper</span></h1></main>
 <script src="page.js"></script>
 </body></html>
